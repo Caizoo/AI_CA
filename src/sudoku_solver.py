@@ -60,7 +60,7 @@ def fitness_ind(board):
                 blocks[block_count] = blocks[block_count]+[cell]
                 rows[row_count+3*int(block_count/3)] = rows[row_count+3*int(block_count/3)]+[cell]
                 cols[(block_count%3)*3+cell_count] = cols[(block_count%3)*3+cell_count]+[cell]
-    return fitness_part(blocks,1)+fitness_part(rows,1) + fitness_part(cols,1)
+    return fitness_part(rows,1) + fitness_part(cols,1)
 
 def fitness_part(part,incrementValue):
     part_fitness = 0
@@ -177,10 +177,10 @@ def print_row(row):
         print()
     print()
 
-POPULATION_SIZE = 10
-NUMBER_GENERATION = 1000
-TRUNCATION_RATE = POPULATION_SIZE/0.1
-MUTATION_RATE = 0.5
+POPULATION_SIZE = 20
+NUMBER_GENERATION = 10000
+TRUNCATION_RATE = 1/POPULATION_SIZE
+MUTATION_RATE = 0.7
 BLOCK_SIZE = 3
 
 evolve()
