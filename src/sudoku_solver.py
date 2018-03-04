@@ -183,4 +183,6 @@ TRUNCATION_RATE = 1/POPULATION_SIZE
 MUTATION_RATE = 0.7
 BLOCK_SIZE = 3
 
-evolve()
+x = evolve()
+print_board(x[0])
+print("Best fitness:",x[1])

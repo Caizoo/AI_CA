@@ -196,45 +196,18 @@ def print_row(row):
         print()
     print()
 
-
-
-POPULATION_SIZE = 10
-NUMBER_GENERATION = 200
-TRUNCATION_RATE = 0.1
-MUTATION_RATE = 0.84
-BLOCK_SIZE = 3
-
 # create given boards
 board1 = create_board(read_in_file("Grid1.txt"))
 board2 = create_board(read_in_file("Grid2.txt"))
 board3 = create_board(read_in_file("Grid3.txt"))
 
-results = []
-run_results = []
 
-for i in range(5):  # 5 runs
-    print()
-    print("Run #", i + 1)
-    POPULATION_SIZE = 10
-    x_b1_10 = evolve(board1)
-    x_b2_10 = evolve(board2)
-    x_b3_10 = evolve(board3)
-    POPULATION_SIZE = 100
-    x_b1_100 = evolve(board1)
-    x_b2_100 = evolve(board2)
-    x_b3_100 = evolve(board3)
-    POPULATION_SIZE = 1000
-    x_b1_1000 = evolve(board1)
-    x_b2_1000 = evolve(board2)
-    x_b3_1000 = evolve(board3)
-    POPULATION_SIZE = 10000
-    x_b1_10000 = evolve(board1)
-    x_b2_10000 = evolve(board2)
-    x_b3_10000 = evolve(board3)
+POPULATION_SIZE = 100
+NUMBER_GENERATION = 200
+TRUNCATION_RATE = 0.1
+MUTATION_RATE = 0.84
+BLOCK_SIZE = 3
 
-    run_results += [(x_b1_10, x_b2_10, x_b3_10, x_b1_100, x_b2_100, x_b3_100, x_b1_1000, x_b2_1000, x_b3_1000,
-                     x_b1_10000, x_b2_10000, x_b3_10000)]
-    print_results(x_b1_10, x_b2_10, x_b3_10, x_b1_100, x_b2_100, x_b3_100, x_b1_1000, x_b2_1000, x_b3_1000, x_b1_10000,
-                  x_b2_10000, x_b3_10000)
-
-draw_graphs(run_results, 10)
+evolve(board1)
+evolve(board2)
+evolve(board3)
