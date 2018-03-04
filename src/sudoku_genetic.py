@@ -1,7 +1,6 @@
 from random import *
 from copy import deepcopy
 import time
-from sudoku_grapher import *
 
 def evolve(board): # begin search with given board
     population = create_pop(board)
@@ -162,7 +161,7 @@ def read_in_file(filename):
 
 def create_board(file_contents):
     board = []
-    for i in range(0, len(file_contents) - 1, BLOCK_SIZE + 1):  # +1 to skip ---!---!--- line
+    for i in range(0, len(file_contents) - 1, 3 + 1):  # +1 to skip ---!---!--- line
         row_blocks = list(
             zip(file_contents[i], file_contents[i + 1], file_contents[i + 2]))  # zip first 3 lines together
         for j in range(0, len(row_blocks) - 1, 4):
@@ -206,8 +205,19 @@ POPULATION_SIZE = 100
 NUMBER_GENERATION = 200
 TRUNCATION_RATE = 0.1
 MUTATION_RATE = 0.84
-BLOCK_SIZE = 3
 
-evolve(board1)
-evolve(board2)
-evolve(board3)
+b1 = evolve(board1)
+b2 = evolve(board2)
+b3 = evolve(board3)
+
+print("Board 1 results ------------")
+print_board(b1[0])
+print("Best fitness:",b1[1])
+print()
+print("Board 2 results ------------")
+print_board(b2[0])
+print("Best fitness:",b2[1])
+print()
+print("Board 3 results ------------")
+print_board(b3[0])
+print("Best fitness:",b3[1])
