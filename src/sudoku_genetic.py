@@ -218,13 +218,15 @@ board1 = create_board(read_in_file("Grid1.txt"))
 board2 = create_board(read_in_file("Grid2.txt"))
 board3 = create_board(read_in_file("Grid3.txt"))
 
-POPULATION_SIZE = 100
-NUMBER_GENERATION = 5000
+POPULATION_SIZE = 1000
+NUMBER_GENERATION = 2000
 TRUNCATION_RATE = 0.2
 MUTATION_RATE = 0.16
 
 b1 = evolve(board1)
+print("Board 1 finished") # keeping track of search
 b2 = evolve(board2)
+print("Board 2 finished")
 b3 = evolve(board3)
 
 print("Board 1 results ------------")
