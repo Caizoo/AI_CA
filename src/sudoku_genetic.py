@@ -32,7 +32,7 @@ def evolve(board): # begin search with given board
             numTimesStuck = 0
             population = create_pop(board)
 
-        print("Current best fitness:",best_fit) # print out current generation's best fitness to keep track of search
+        print("Current best fitness:",best_fit,"Current gen:",generations_to_solve) # print out current generation's best fitness to keep track of search
         generations_to_solve += 1
 
     total_fitness = 0
@@ -218,7 +218,7 @@ board1 = create_board(read_in_file("Grid1.txt"))
 board2 = create_board(read_in_file("Grid2.txt"))
 board3 = create_board(read_in_file("Grid3.txt"))
 
-POPULATION_SIZE = 1000
+POPULATION_SIZE = 100
 NUMBER_GENERATION = 2000
 TRUNCATION_RATE = 0.2
 MUTATION_RATE = 0.16
