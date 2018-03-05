@@ -3,6 +3,13 @@ from copy import deepcopy
 import time
 
 def evolve(board): # begin search with given board
+
+    numTimesStuck = 0
+    prevBestFit = 10000
+
+    total_best_ind = 0
+    total_best_fit = 10000
+
     population = create_pop(board)
     fitness_population = evaluate_pop(population, board) # evaluate initial population
     generations_to_solve = 0
@@ -13,15 +20,26 @@ def evolve(board): # begin search with given board
         population = mutate_pop(offspring_population)            # mutate the children
         fitness_population = evaluate_pop(population, board)     # evaluate
         best_ind, best_fit = best_pop(population, fitness_population)
+        if(best_fit<total_best_fit): total_best_ind,total_best_fit = best_ind,best_fit # best solution of current generation
         if (best_fit == 0): break # if solution is found, end search
+
+        if(best_fit==prevBestFit): # if best fitness is same as last gen, add one to stuck counter
+            numTimesStuck += 1
+        else:
+            numTimesStuck = 0
+        prevBestFit = best_fit
+        if(numTimesStuck>30): # if stuck in local minimum, start population over with a new initial population
+            numTimesStuck = 0
+            population = create_pop(board)
+
+        print("Current best fitness:",best_fit) # print out current generation's best fitness to keep track of search
         generations_to_solve += 1
-    # print_board(matrix_addition(best_ind,board))
+
     total_fitness = 0
-    for i in fitness_population:
+    for i in fitness_population: # used for average fitness of last population
         total_fitness += i
 
-    return (best_ind, best_fit, generations_to_solve, (total_fitness / POPULATION_SIZE), time.time() - t) # return perfomance results
-
+    return (total_best_ind, total_best_fit, generations_to_solve, (total_fitness / POPULATION_SIZE), time.time() - t) # return perfomance results
 
 # population-level operators
 
@@ -88,7 +106,7 @@ def mutate_ind(individual):
 
 
 def mutate_block(block):  # completely mix up a single block
-    if random() < MUTATION_RATE: return deepcopy(block) # if not mutate, return unaffected block
+    if random() > MUTATION_RATE: return deepcopy(block) # if not mutate, return unaffected block
     new_block = deepcopy(block)
 
     indices_to_choose = []
@@ -200,11 +218,10 @@ board1 = create_board(read_in_file("Grid1.txt"))
 board2 = create_board(read_in_file("Grid2.txt"))
 board3 = create_board(read_in_file("Grid3.txt"))
 
-
 POPULATION_SIZE = 100
-NUMBER_GENERATION = 200
-TRUNCATION_RATE = 0.1
-MUTATION_RATE = 0.84
+NUMBER_GENERATION = 5000
+TRUNCATION_RATE = 0.2
+MUTATION_RATE = 0.16
 
 b1 = evolve(board1)
 b2 = evolve(board2)
@@ -212,12 +229,12 @@ b3 = evolve(board3)
 
 print("Board 1 results ------------")
 print_board(matrix_addition(b1[0],board1))
-print("Best fitness:",b1[1])
+print("Best fitness:",b1[1],"Num generations:",b1[2])
 print()
 print("Board 2 results ------------")
 print_board(matrix_addition(b2[0],board2))
-print("Best fitness:",b2[1])
+print("Best fitness:",b2[1],"Num generations:",b2[2])
 print()
 print("Board 3 results ------------")
 print_board(matrix_addition(b3[0],board3))
-print("Best fitness:",b3[1])
+print("Best fitness:",b3[1],"Num generations:",b3[2])

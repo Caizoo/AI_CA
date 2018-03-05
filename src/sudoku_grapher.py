@@ -1,6 +1,6 @@
 # code for plotting results in Anaconda Notebook using matplotlib
-from sudoku_genetic import *
 
+# CELL 2, DEFINE THE CODE IN SUDOKU_GENETIC FIRST
 def print_results(x_b1_10, x_b2_10, x_b3_10, x_b1_100, x_b2_100, x_b3_100, x_b1_1000, x_b2_1000, x_b3_1000, x_b1_10000,
                   x_b2_10000, x_b3_10000):
     print()
@@ -33,7 +33,6 @@ def print_results(x_b1_10, x_b2_10, x_b3_10, x_b1_100, x_b2_100, x_b3_100, x_b1_
           "Average fitness in final gen:", x_b3_1000[3], "time:", x_b3_1000[4], "s")
     print("Best fitness pop size 10000:", x_b3_10000[1], "Generations to solve:", x_b3_10000[2],
           "Average fitness in final gen:", x_b3_10000[3], "time:", x_b3_10000[4], "s")
-
 
 def list_addition(x1, x2):
     return [sum(x) for x in zip(x1, x2)]
@@ -142,6 +141,7 @@ def draw_graphs(results, num_gen):
     plt.ylabel('Average fitness')
     plt.show()
 
+# CELL 3, RUNS THE EXPERIMENTS AND DRAWS THE GRAPHS
 
 POPULATION_SIZE = 10
 NUMBER_GENERATION = 200
